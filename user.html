@@ -49,6 +49,12 @@
             padding-left: 1.5rem;
         }
 
+        .order-container {
+            display: flex;
+            justify-content: flex-start; /* 左对齐 */
+            gap: 0rem; /* 元素间距 */
+        }
+
         .scrollbar {
             height: calc(96vh - 273px);
             overflow-y: auto;
@@ -132,11 +138,15 @@
         }
 
         .fakeordertitle {
+            display: inline-block;
             font-weight: 600;
             text-decoration: none;
+            justify-content: flex-start;
         }
 
         .success-text {
+            display: inline-block;
+            justify-content: flex-end;
             color: #999;
             font-size: .85rem;
             font-weight: 600;
@@ -156,8 +166,19 @@
             border-radius: 5px;
             padding: .3125rem .75rem;
         }
+        .cancelorder {
+            color: #ff902b;
+            font-size: .85rem;
+            border-width: 1px;
+            border-style: solid;
+            border-radius: 5px;
+            padding: .3125rem .75rem;
+            display: flex;
+            justify-content: flex-start;
+        }
 
         .orderinfo {
+            margin-left: auto;
             font-size: .85rem;
             padding-top: .35rem;
             padding-bottom: .625rem;
@@ -195,6 +216,7 @@
                     <div class="fakeordertitle">订单 ???</div>
                     <div class="success-text">预订成功</div>
                 </dt>
+                
                 <dd>
                     <a class="ordercontent" onclick="goOrder()">
                         <div id="bookplace">???</div>
@@ -203,7 +225,11 @@
                     </a>
                 </dd>
                 <dt>
-                    <div class="orderagain">再来一单</div>
+                    <div class="order-container">
+                        <div class="orderagain">再来一单</div>
+                        <div id="void">&nbsp;</div>
+                        <div class="cancelorder">取消订单</div>
+                    </div>
                     <div class="orderinfo">金额:
                         <span class="moneysign" id="money">¥???</span>
                         &nbsp;数量: 1
@@ -396,7 +422,7 @@
         var place = GetQueryString("place");
         var money = GetQueryString("money");
         var time = GetQueryString("time") ? GetQueryString("time"):"2024-04-25 13:03:35";
-        var ot = GetQueryString("ordertime");
+        var ot = GetQueryString("ordertime") ? GetQueryString("ordertime"):"2024-04-25 13:03:35";
         var ot1 = new Date(ot);
         ot1.setMilliseconds(randomNum(100,999));
         var otstamp = ot1.getTime() * 1000 + randomNum(100,999);
