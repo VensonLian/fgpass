@@ -420,7 +420,7 @@
         bts[0].innerHTML = time;
         bts[1].innerHTML = "预定日期:" + time.trim();
         time_date = time.split("&nbsp;&nbsp;");
-        document.getElementById("ordertime").textContent = ordertime.replace("T",' ');
+        document.getElementById("ordertime").textContent = ordertime.replace("T",' ') + ":" + randomNum(10,59);
         var ot = new Date(ordertime);
         ot.setMilliseconds(randomNum(100,999));
         var otstamp = ot.getTime() * 1000 + randomNum(100,999);
@@ -436,7 +436,7 @@
                                             + '&place=' + encodeURIComponent(place)
                                             + '&money=' + encodeURIComponent(money)
                                             + '&time=' + encodeURIComponent(time)
-                                            + '&ordertime=' + encodeURIComponent(ot);
+                                            + '&ordertime=' + encodeURIComponent(ordertime);
         };
         function goUser() {
             window.location.href = './user.html?name=' + encodeURIComponent(sname)
@@ -444,7 +444,7 @@
                                             + '&place=' + encodeURIComponent(place)
                                             + '&money=' + encodeURIComponent(money)
                                             + '&time=' + encodeURIComponent(time)
-                                            + '&ordertime=' + encodeURIComponent(ot);
+                                            + '&ordertime=' + encodeURIComponent(ordertime);
         };
     </script>
 </body>
