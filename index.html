@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <title>FAKE GYM PASS</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding: 1em 0;
+            background-color: #f1f1f1;
+            font-size: 0.7em;
+            text-align: center;
+        }
+        
+        .flex-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .floatWindowContainer {
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .floatWindow {
+            position: fixed;
+            z-index: 1;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 500px;
+            background-color: #f1f1f1;
+            padding: 1em;
+            border-radius: 1em;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 2em;
+            font-weight: bold;
+            position: absolute;
+            right: .5em;
+            top: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flex-container">
+        <h1>FAKE GYM PASS</h1>
+    </div>
+    <section class="flex-container">
+        <table style="text-align: left;">
+            <tr>
+                <th>姓名</th>
+                <td>
+                    <input id="sname" style="width: 10rem;">
+                </td>
+            </tr>
+            <tr>
+                <th>学号</th>
+                <td>
+                    <input id="studentid" style="width: 10rem;">
+                </td>
+            </tr>
+            <tr>
+                <th>预约场馆</th>
+                <td>
+                    <input id="place" style="width: 10rem;">
+                </td>
+            </tr>
+            <tr>
+                <th>预约金额</th>
+                <td>
+                    <input id="money" style="width: 10rem;">
+                </td>
+            </tr>
+            <tr>
+                <th>预约时段</th>
+                <td>
+                    <input type="date" id="date" style="width: 10rem;">
+                </td>
+            </tr>
+            <tr>
+                <th></th>
+                <td id="book-time-input" class="flex-container" style="justify-content: space-between;">
+                    <input type="time" id="time1" list="timedl1" onchange="changeTime2()">
+                    -
+                    <input type="time" id="time2" list="timedl2">
+                </td>
+                <script>
+                    var dl1 = document.createElement("datalist");
+                    var mnt1 = ["01", "31"];
+                    p = document.getElementById("book-time-input");
+                    dl1.id = "timedl1";
+                    for (var t1=0;t1<25;t1++) {
+                        var opt1 = document.createElement("option");
+                        var opt2 = document.createElement("option");
+                        opt1.textContent = String(t1).padStart(2, '0')+":"+mnt1[0];
+                        opt2.textContent = String(t1).padStart(2, '0')+":"+mnt1[1];
+                        dl1.appendChild(opt1);
+                        dl1.appendChild(opt2);
+                    }
+                    p.appendChild(dl1);
+                    function changeTime2(){
+                        var time2 = document.getElementById("time2");
+                        time2.value = "";
+                        var start = document.getElementById("time1").value;
+                        var t2 = parseInt(start.split(":")[0]);
+                        var olddl2 = document.getElementById("timedl2");
+                        if (olddl2) {
+                            olddl2.remove();
+                        }
+                        var dl2 = document.createElement("datalist");
+                        dl2.id = "timedl2";
+                        var mnt2 = ["00", "30"];
+                        if (start.split(":")[1] == "31") {
+                            t2++;
+                            var opt_first = document.createElement("option");
+                            opt_first.textContent = String(t2).padStart(2, '0')+":"+mnt2[0];
+                            dl2.appendChild(opt_first);
+                        }
+                        var opt = document.createElement("option");
+                        opt.textContent = String(t2).padStart(2, '0')+":"+mnt2[1];
+                        dl2.appendChild(opt);
+                        t2++;
+                        for (t2;t2<25;t2++) {
+                            var opt1 = document.createElement("option");
+                            var opt2 = document.createElement("option");
+                            opt1.textContent = String(t2).padStart(2, '0')+":"+mnt2[0];
+                            opt2.textContent = String(t2).padStart(2, '0')+":"+mnt2[1];
+                            dl2.appendChild(opt1);
+                            dl2.appendChild(opt2);
+                            p.appendChild(dl2);
+                        }
+                    };
+                </script>
+            </tr>
+            <tr>
+                <th>下单时间</th>
+                <td>
+                    <input type="datetime-local" id="ordertime" style="width: 10rem;">
+                </td>
+            </tr>
+            <tr>
+                <th></th>
+                <td class="flex-container">
+                    <button onclick="enter()">Go!</button>
+                </td>
+            </tr>
+        </table>
+    </section>
+    <footer>
+        <span>© 2024 MAJ</span>
+        <span>|</span>
+        <a href="https://github.com/wangyk55/FAKE-GYM-PASS">GitHub</a>
+        <span>|</span>
+        <a onclick="openFloatWindow()" href="#">隐私声明</a>
+        <div>本项目仅供学习交流，严禁用于造假及非法用途</div>
+    </footer>
+    <div class="floatWindowContainer" id="floatWindowContainer" hidden="hidden">
+        <div class="floatWindow">
+            <div class="floatWindow-content">
+                <span class="close" onclick="closeFloatWindow()">&times;</span>
+                <h4>隐私声明</h4>
+                <p>本网站不会收集任何用户信息</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return decodeURIComponent(r[2]); return null;
+        }
+        var sname = GetQueryString("name");
+        var id = GetQueryString("id");
+        var place = GetQueryString("place");
+        var money = GetQueryString("money");
+        var time = GetQueryString("time");
+        var ordertime = GetQueryString("ordertime");
+        if (sname != null) {
+            document.getElementById("sname").value = sname;
+        }
+        if (id != null) {
+            document.getElementById("studentid").value = id;
+        }
+        if (place != null) {
+            document.getElementById("place").value = place;
+        }
+        if (money != null) {
+            document.getElementById("money").value = money;
+        }
+        if (time != null) {
+            var t = time.split("&nbsp;&nbsp;");
+            document.getElementById("date").value = t[0];
+            var t1 = t[1].split("-");
+            document.getElementById("time1").value = t1[0];
+            changeTime2();
+            document.getElementById("time2").value = t1[1].trim();
+        }
+        if (ordertime != null) {
+            document.getElementById("ordertime").value = ordertime;
+        }
+        function enter() {
+            var sname = document.getElementById("sname").value;
+            var id = document.getElementById("studentid").value;
+            var place = document.getElementById("place").value;
+            var money = document.getElementById("money").value;
+            var date = document.getElementById("date").value;
+            var time1 = document.getElementById("time1").value;
+            var time2 = document.getElementById("time2").value;
+            var time = date+"&nbsp;&nbsp;"+time1+"-"+time2+" &nbsp;&nbsp;";
+            var ordertime = document.getElementById("ordertime").value;
+            window.location.href = './home.html?name=' + encodeURIComponent(sname)
+                                            + '&id=' + encodeURIComponent(id)
+                                            + '&place=' + encodeURIComponent(place)
+                                            + '&money=' + encodeURIComponent(money)
+                                            + '&time=' + encodeURIComponent(time)
+                                            + '&ordertime=' + encodeURIComponent(ordertime);
+        }
+
+        function openFloatWindow() {
+            document.getElementById("floatWindowContainer").hidden = false;
+        }
+
+        function closeFloatWindow() {
+            document.getElementById("floatWindowContainer").hidden = true;
+        }
+    </script>
+</body>
+
+</html>
