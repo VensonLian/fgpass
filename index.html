@@ -186,6 +186,19 @@
         </div>
     </div>
     <script>
+        function randomNum(minNum,maxNum){ 
+            switch(arguments.length){ 
+                case 1: 
+                    return parseInt(Math.random()*minNum+1,10); 
+                    break; 
+                case 2: 
+                    return parseInt(Math.random()*(maxNum-minNum+1)+minNum,10); 
+                    break; 
+                default: 
+                    return 0; 
+                    break; 
+            } 
+        } 
         function GetQueryString(name) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
             var r = window.location.search.substr(1).match(reg);
@@ -229,7 +242,7 @@
             var time1 = document.getElementById("time1").value;
             var time2 = document.getElementById("time2").value;
             var time = date+"&nbsp;&nbsp;"+time1+"-"+time2+" &nbsp;&nbsp;";
-            var ordertime = document.getElementById("ordertime").value;
+            var ordertime = document.getElementById("ordertime").value + ":" + randomNum(10,59);
             window.location.href = './home.html?name=' + encodeURIComponent(sname)
                                             + '&id=' + encodeURIComponent(id)
                                             + '&place=' + encodeURIComponent(place)

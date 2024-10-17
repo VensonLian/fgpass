@@ -420,7 +420,7 @@
         bts[0].innerHTML = time;
         bts[1].innerHTML = "预定日期:" + time.trim();
         time_date = time.split("&nbsp;&nbsp;");
-        document.getElementById("ordertime").textContent = ordertime.replace("T",' ') + ":" + randomNum(10,59);
+        document.getElementById("ordertime").textContent = ordertime.replace("T",' ');
         var ot = new Date(ordertime);
         ot.setMilliseconds(randomNum(100,999));
         var otstamp = ot.getTime() * 1000 + randomNum(100,999);
