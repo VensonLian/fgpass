@@ -423,9 +423,8 @@
         var money = GetQueryString("money");
         var time = GetQueryString("time") ? GetQueryString("time"):"2024-04-25 13:03:35";
         var ot = GetQueryString("ordertime") ? GetQueryString("ordertime"):"2024-04-25 13:03:35";
-        var ot1 = new Date(ot);
-        ot1.setMilliseconds(randomNum(100,999));
-        var otstamp = ot1.getTime() * 1000 + randomNum(100,999);
+        var otstamp = GetQueryString("otstamp") ? GetQueryString("otstamp") : 0;
+        var vercode = GetQueryString("vercode") ? GetQueryString("vercode") : "???";
         document.getElementById("username").textContent = sname;
         document.getElementById("bookplace").textContent = place;
         time_date = time.split("&nbsp;&nbsp;")[0];
@@ -433,7 +432,6 @@
         document.getElementById("ordertime").textContent = "下单日期:" + ot.replace('T',' ');
         document.getElementById("money").textContent = "¥" + money;
         document.getElementsByClassName("fakeordertitle")[0].textContent = "订单 " + otstamp;
-
         var date_book = new Date(time_date);
         var date_instance = new Date(time_date);
         var date_diff = [-4, -5, -13, -17, -22, -24, -27, -30];
@@ -451,7 +449,9 @@
                                             + '&place=' + encodeURIComponent(place)
                                             + '&money=' + encodeURIComponent(money)
                                             + '&time=' + encodeURIComponent(time)
-                                            + '&ordertime=' + encodeURIComponent(ot);
+                                            + '&ordertime=' + encodeURIComponent(ot)
+                                            + '&vercode=' + encodeURIComponent(vercode)
+                                            + '&otstamp=' + encodeURIComponent(otstamp);
         };
         function goOrder() {
             window.location.href = './order.html?name=' + encodeURIComponent(sname)
@@ -459,8 +459,10 @@
                                             + '&place=' + encodeURIComponent(place)
                                             + '&money=' + encodeURIComponent(money)
                                             + '&time=' + encodeURIComponent(time)
-                                            + '&ordertime=' + encodeURIComponent(ot);
-        };
+                                            + '&ordertime=' + encodeURIComponent(ot)
+                                            + '&vercode=' + encodeURIComponent(vercode)
+                                            + '&otstamp=' + encodeURIComponent(otstamp);
+        }
     </script>
 </body>
 

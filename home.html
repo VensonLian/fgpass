@@ -354,6 +354,8 @@
         var money = GetQueryString("money");
         var time = GetQueryString("time");
         var ordertime = GetQueryString("ordertime");
+        var otstamp = GetQueryString("otstamp") ? GetQueryString("otstamp") : 0;
+        var vercode = GetQueryString("vercode") ? GetQueryString("vercode") : "???";
         document.getElementById("welcometext").textContent = "欢迎，" + sname;
         function goNext() {
             window.location.href = './user.html?name=' + encodeURIComponent(sname)
@@ -361,7 +363,9 @@
                                             + '&place=' + encodeURIComponent(place)
                                             + '&money=' + encodeURIComponent(money)
                                             + '&time=' + encodeURIComponent(time)
-                                            + '&ordertime=' + encodeURIComponent(ordertime);
+                                            + '&ordertime=' + encodeURIComponent(ordertime)
+                                            + '&vercode=' + encodeURIComponent(vercode)
+                                            + '&otstamp=' + encodeURIComponent(otstamp);
         }
         function goIndex() {
             window.location.href = './index.html?name=' + encodeURIComponent(sname)
@@ -369,7 +373,9 @@
                                             + '&place=' + encodeURIComponent(place)
                                             + '&money=' + encodeURIComponent(money)
                                             + '&time=' + encodeURIComponent(time)
-                                            + '&ordertime=' + encodeURIComponent(ordertime);
+                                            + '&ordertime=' + encodeURIComponent(ordertime)
+                                            + '&vercode=' + encodeURIComponent(vercode)
+                                            + '&otstamp=' + encodeURIComponent(otstamp);
         }
     </script>
 </body>

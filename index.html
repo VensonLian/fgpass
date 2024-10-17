@@ -169,9 +169,9 @@
         </table>
     </section>
     <footer>
-        <span>© 2024</span>
+        <span>© 2024 MAJ</span>
         <span>|</span>
-        <a href="https://github.com/VensonLian/fgpplus">GitHub</a>
+        <a href="https://github.com/wangyk55/FAKE-GYM-PASS">GitHub</a>
         <span>|</span>
         <a onclick="openFloatWindow()" href="#">隐私声明</a>
         <div>本项目仅供学习交流，严禁用于造假及非法用途</div>
@@ -243,12 +243,18 @@
             var time2 = document.getElementById("time2").value;
             var time = date+"&nbsp;&nbsp;"+time1+"-"+time2+" &nbsp;&nbsp;";
             var ordertime = document.getElementById("ordertime").value;
+            var vercode = randomNum(1000,9999) + '' + randomNum(1000,9999) + ''+ randomNum(1000,9999) + ''+ randomNum(1000,9999);
+            var ot = new Date(ordertime);
+            ot.setMilliseconds(randomNum(100,999));
+            var otstamp = ot.getTime() * 1000 + randomNum(100,999);
             window.location.href = './home.html?name=' + encodeURIComponent(sname)
                                             + '&id=' + encodeURIComponent(id)
                                             + '&place=' + encodeURIComponent(place)
                                             + '&money=' + encodeURIComponent(money)
                                             + '&time=' + encodeURIComponent(time)
-                                            + '&ordertime=' + encodeURIComponent(ordertime);
+                                            + '&ordertime=' + encodeURIComponent(ordertime)
+                                            + '&vercode=' + encodeURIComponent(vercode)
+                                            + '&otstamp=' + encodeURIComponent(otstamp);
         }
 
         function openFloatWindow() {

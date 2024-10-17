@@ -355,7 +355,6 @@
     </div>
     <script>
         var qrcode = null; //定义一个全局变量，用来存储生成的二维码对象
-        var vercode = randomNum(1000,9999) + '' + randomNum(1000,9999) + ''+ randomNum(1000,9999) + ''+ randomNum(1000,9999);
         function generate() {
             var text = vercode;
             if (text) { //如果内容不为空
@@ -410,6 +409,8 @@
         var money = GetQueryString("money");
         var time = GetQueryString("time") ? GetQueryString("time"):"2024-04-25 13:03:35";
         var ordertime = GetQueryString("ordertime") ? GetQueryString("ordertime"):"2024-04-25T13:03:35";
+        var otstamp = GetQueryString("otstamp") ? GetQueryString("otstamp") : 0;
+        var vercode = GetQueryString("vercode") ? GetQueryString("vercode") : "???";
         document.getElementById("sname").textContent = sname;
         document.getElementById("id").textContent = id;
         var bps = document.getElementsByName("bookplace");
@@ -421,9 +422,6 @@
         bts[1].innerHTML = "预定日期:" + time.trim();
         time_date = time.split("&nbsp;&nbsp;");
         document.getElementById("ordertime").textContent = ordertime.replace("T",' ');
-        var ot = new Date(ordertime);
-        ot.setMilliseconds(randomNum(100,999));
-        var otstamp = ot.getTime() * 1000 + randomNum(100,999);
         document.getElementById("ordernum").textContent = "订单"+ otstamp;
         document.getElementById("money").textContent = "￥" + money + ".00";
         document.getElementById("codenumberandchar").textContent = "验证码 " + vercode;
@@ -436,7 +434,9 @@
                                             + '&place=' + encodeURIComponent(place)
                                             + '&money=' + encodeURIComponent(money)
                                             + '&time=' + encodeURIComponent(time)
-                                            + '&ordertime=' + encodeURIComponent(ordertime);
+                                            + '&ordertime=' + encodeURIComponent(ordertime)
+                                            + '&vercode=' + encodeURIComponent(vercode)
+                                            + '&otstamp=' + encodeURIComponent(otstamp);
         };
         function goUser() {
             window.location.href = './user.html?name=' + encodeURIComponent(sname)
@@ -444,7 +444,9 @@
                                             + '&place=' + encodeURIComponent(place)
                                             + '&money=' + encodeURIComponent(money)
                                             + '&time=' + encodeURIComponent(time)
-                                            + '&ordertime=' + encodeURIComponent(ordertime);
+                                            + '&ordertime=' + encodeURIComponent(ordertime)
+                                            + '&vercode=' + encodeURIComponent(vercode)
+                                            + '&otstamp=' + encodeURIComponent(otstamp);
         };
     </script>
 </body>
