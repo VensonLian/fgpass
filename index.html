@@ -161,6 +161,13 @@
                 </td>
             </tr>
             <tr>
+            <tr>
+                <th>验证码</th>
+                <td>
+                    <input id="vercode" placeholder="16位校验码，若不填，则随机生成" style="width: 15rem;"/>
+                </td>
+            </tr>
+            <tr>
                 <th></th>
                 <td class="flex-container">
                     <button onclick="enter()">Go!</button>
@@ -210,6 +217,7 @@
         var money = GetQueryString("money");
         var time = GetQueryString("time");
         var ordertime = GetQueryString("ordertime");
+        var vercode = GetQueryString("vercode");
         if (sname != null) {
             document.getElementById("sname").value = sname;
         }
@@ -233,6 +241,9 @@
         if (ordertime != null) {
             document.getElementById("ordertime").value = ordertime;
         }
+        if (vercode != null){
+            document.getElementById("vercode").value = vercode;
+        }
         function enter() {
             var sname = document.getElementById("sname").value;
             var id = document.getElementById("studentid").value;
@@ -243,7 +254,7 @@
             var time2 = document.getElementById("time2").value;
             var time = date+"&nbsp;&nbsp;"+time1+"-"+time2+" &nbsp;&nbsp;";
             var ordertime = document.getElementById("ordertime").value;
-            var vercode = randomNum(1000,9999) + '' + randomNum(1000,9999) + ''+ randomNum(1000,9999) + ''+ randomNum(1000,9999);
+            var vercode = document.getElementById("vercode").value ? document.getElementById("vercode").value : randomNum(1000,9999) + '' + randomNum(1000,9999) + ''+ randomNum(1000,9999) + ''+ randomNum(1000,9999);
             var ot = new Date(ordertime);
             ot.setMilliseconds(randomNum(100,999));
             var otstamp = ot.getTime() * 1000 + randomNum(100,999);
